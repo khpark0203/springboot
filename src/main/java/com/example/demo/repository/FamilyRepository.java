@@ -1,15 +1,15 @@
 package com.example.demo.repository;
 
-import org.springframework.stereotype.Repository;
+import java.util.List;
 import com.example.demo.model.Family;
 
+public interface FamilyRepository {
 
-@Repository
-public class FamilyRepository {
-
-	private Family family;
-
-	public Family getName(int id) {
-		return family; 
-	}
+	List<Family> list();
+	
+	// CRUD
+	Family create(Family family);
+	// Family get(Long id);
+	// Family update(int id, Family family);
+	// Family delete(int id);
 }

@@ -1,0 +1,9 @@
+server:
+  port: 8000
+
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: "jdbc:mariadb://localhost:3306/home"
+    username: root
+    password: rhksgh
