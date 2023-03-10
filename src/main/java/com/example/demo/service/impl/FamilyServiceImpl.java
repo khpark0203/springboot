@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.exception.ErrorMessage;
+import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.Family;
 import com.example.demo.repository.FamilyRepository;
 import com.example.demo.service.FamilyService;
@@ -18,12 +20,17 @@ public class FamilyServiceImpl implements FamilyService {
     private FamilyRepository familyRepository;
 
 	@Override
-	public List<Family> getFamily() {
+	public List<Family> getFamilyList() {
 		return familyRepository.list();
 	}
 
 	@Override
 	public Family createFamily(Family family) {
 		return familyRepository.create(family);
+	}
+
+	@Override
+	public Family getFamily(Long id) {
+		return familyRepository.getFamily(id).orElseThrow(() -> new NotFoundException(ErrorMessage.NOT_FOUND));
 	}
 }

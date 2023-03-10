@@ -1,6 +1,7 @@
 package com.example.demo.repository.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
@@ -32,8 +33,8 @@ public class FamilyRepositoryImpl implements FamilyRepository {
 		return familyJpaRepository.save(family);
 	}
 
-	// @Override
-	// public Family get(Long id) {
-	// 	return familyJPARepository.findOne(id);
-	// }
+	@Override
+	public Optional<Family> getFamily(Long id) {
+		return familyJpaRepository.findById(id);
+	}
 }
