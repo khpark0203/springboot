@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.model.Family;
 import com.example.demo.repository.FamilyRepository;
 
-interface FamilyJPARepository extends JpaRepository<Family, Long> {
+interface FamilyJpaRepository extends JpaRepository<Family, Long> {
 }
 
 @Primary
@@ -18,18 +18,18 @@ interface FamilyJPARepository extends JpaRepository<Family, Long> {
 public class FamilyRepositoryImpl implements FamilyRepository {
 
 	@Autowired
-	private FamilyJPARepository familyJPARepository;
+	private FamilyJpaRepository familyJpaRepository;
 
 	@Override
 	public List<Family> list() {
-		System.out.println("JPA Repo: " + familyJPARepository);
+		System.out.println("JPA Repo: " + familyJpaRepository);
 
-		return familyJPARepository.findAll();
+		return familyJpaRepository.findAll();
 	}
 
 	@Override
 	public Family create(Family family) {
-		return familyJPARepository.save(family);
+		return familyJpaRepository.save(family);
 	}
 
 	// @Override
