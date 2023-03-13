@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.controller.dto.FamilyDto.FamilyRequest;
 import com.example.demo.controller.dto.FamilyDto.FamilyResponse;
 import com.example.demo.model.Family;
 import com.example.demo.service.FamilyService;
@@ -25,8 +27,16 @@ public class FamilyController {
     private FamilyService familyService;
 
     @GetMapping("")
-    public List<Family> getFamilyList() {
-        return familyService.getFamilyList();
+    public List<FamilyResponse> getFamilyList() {
+        List<Family> familyList = familyService.getFamilyList();
+        List<FamilyResponse> res = new ArrayList<>();
+
+        for (Family f : familyList) {
+            FamilyResponse familyRes = new FamilyResponse();
+            res.add(familyRes.fromEntity(f));
+        }
+
+        return res;
     }
 
     @GetMapping("/asdf")
@@ -37,17 +47,15 @@ public class FamilyController {
     @GetMapping("/{id}")
     public ResponseEntity<FamilyResponse> getFamily(@PathVariable Long id) {
         Family family = familyService.getFamily(id);
-        FamilyResponse familyResponse = new FamilyResponse();
-        ResponseEntity<FamilyResponse> res = new ResponseEntity<>(familyResponse, HttpStatus.OK);
-
-        familyResponse.setId(family.getId());
-        familyResponse.setName(family.getName());
+        FamilyResponse familyResponse = new FamilyResponse().fromEntity(family);
         
-        return res;
+        return new ResponseEntity<>(familyResponse, HttpStatus.OK);
     }
 
     @PostMapping("")
-    public Family create(@RequestBody Family family) {
-        return familyService.createFamily(family);
+    public FamilyResponse create(@RequestBody FamilyRequest familyReq) {
+        FamilyResponse res = new FamilyResponse();
+        res.fromEntity(familyService.createFamily(familyReq.toEntity()));
+        return res;
     }
 }
