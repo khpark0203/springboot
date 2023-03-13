@@ -21,16 +21,21 @@ public class FamilyServiceImpl implements FamilyService {
 
 	@Override
 	public List<Family> getFamilyList() {
-		return familyRepository.list();
+		return familyRepository.findAll();
+	}
+
+	@Override
+	public List<Family> getFFF() {
+		return familyRepository.findFamilyList();
 	}
 
 	@Override
 	public Family createFamily(Family family) {
-		return familyRepository.create(family);
+		return familyRepository.save(family);
 	}
 
 	@Override
 	public Family getFamily(Long id) {
-		return familyRepository.getFamily(id).orElseThrow(() -> new NotFoundException(ErrorMessage.NOT_FOUND));
+		return familyRepository.findById(id).orElseThrow(() -> new NotFoundException(ErrorMessage.NOT_FOUND));
 	}
 }

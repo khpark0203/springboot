@@ -1,17 +1,13 @@
 package com.example.demo.repository;
 
 import java.util.List;
-import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.example.demo.model.Family;
 
-public interface FamilyRepository {
-
-	List<Family> list();
-	
-	// CRUD
-	Family create(Family family);
-	Optional<Family> getFamily(Long id);
-	// Family update(int id, Family family);
-	// Family delete(int id);
+public interface FamilyRepository extends JpaRepository<Family, Long> {
+	@Query("SELECT f FROM Family f")
+	List<Family> findFamilyList();
 }
