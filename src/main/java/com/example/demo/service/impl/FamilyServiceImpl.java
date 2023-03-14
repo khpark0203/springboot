@@ -25,11 +25,6 @@ public class FamilyServiceImpl implements FamilyService {
 	}
 
 	@Override
-	public List<Family> getFFF() {
-		return familyRepository.findFamilyList();
-	}
-
-	@Override
 	public Family createFamily(Family family) {
 		return familyRepository.save(family);
 	}

@@ -27,7 +27,7 @@ public class FamilyController {
     private FamilyService familyService;
 
     @GetMapping("")
-    public List<FamilyResponse> getFamilyList() {
+    public ResponseEntity<List<FamilyResponse>> getFamilyList() {
         List<Family> familyList = familyService.getFamilyList();
         List<FamilyResponse> res = new ArrayList<>();
 
@@ -36,12 +36,7 @@ public class FamilyController {
             res.add(familyRes.fromEntity(f));
         }
 
-        return res;
-    }
-
-    @GetMapping("/asdf")
-    public List<Family> fff() {
-        return familyService.getFFF();
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -53,9 +48,9 @@ public class FamilyController {
     }
 
     @PostMapping("")
-    public FamilyResponse create(@RequestBody FamilyRequest familyReq) {
+    public ResponseEntity<FamilyResponse> create(@RequestBody FamilyRequest familyReq) {
         FamilyResponse res = new FamilyResponse();
         res.fromEntity(familyService.createFamily(familyReq.toEntity()));
-        return res;
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }
