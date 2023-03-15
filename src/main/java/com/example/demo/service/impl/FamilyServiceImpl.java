@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.client.GoarchClient;
 import com.example.demo.exception.ErrorMessage;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.Family;
@@ -21,6 +22,8 @@ public class FamilyServiceImpl implements FamilyService {
 
 	@Override
 	public List<Family> getFamilyList() {
+		// TODO: 지우기 그냥 테스트용
+		System.out.println(new GoarchClient().getUsers());
 		return familyRepository.findAll();
 	}
 
