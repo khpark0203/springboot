@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.example.demo.controller.dto.ErrorDto.ErrorResponse;
+import com.example.demo.controller.dto.ErrorResponse;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {

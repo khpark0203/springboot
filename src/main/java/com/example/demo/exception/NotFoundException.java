@@ -9,10 +9,10 @@ public class NotFoundException extends RuntimeException {
 	}
 
 	public int getCode() {
-		return e.getCode();
+		return this.e.getCode();
 	}
 
 	public String getMessage() {
-		return e.getMessage();
+		return this.e.getMessage();
 	}
 }
