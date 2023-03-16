@@ -8,13 +8,13 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FamilyRequest {
-	private Long id;
-	private String name;
+    private Long id;
+    private String name;
 
-	public Family toEntity() {
-		Family family = new Family();
-		family.setId(this.id);
-		family.setName(this.name);
-		return family;
-	}
+    public Family toEntity() {
+        Family family = new Family();
+        family.setId(this.id);
+        family.setName(this.name);
+        return family;
+    }
 }

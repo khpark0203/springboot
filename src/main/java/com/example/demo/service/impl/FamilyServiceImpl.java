@@ -20,20 +20,20 @@ public class FamilyServiceImpl implements FamilyService {
     @Autowired
     private FamilyRepository familyRepository;
 
-	@Override
-	public List<Family> getFamilyList() {
-		// TODO: 지우기 그냥 테스트용
-		System.out.println(new GoarchClient().getUsers());
-		return familyRepository.findAll();
-	}
+    @Override
+    public List<Family> getFamilyList() {
+        // TODO: 지우기 그냥 테스트용
+        System.out.println(new GoarchClient<Family>().getUsers());
+        return familyRepository.findAll();
+    }
 
-	@Override
-	public Family createFamily(Family family) {
-		return familyRepository.save(family);
-	}
+    @Override
+    public Family createFamily(Family family) {
+        return familyRepository.save(family);
+    }
 
-	@Override
-	public Family getFamily(Long id) {
-		return familyRepository.findById(id).orElseThrow(() -> new NotFoundException(ErrorMessage.NOT_FOUND));
-	}
+    @Override
+    public Family getFamily(Long id) {
+        return familyRepository.findById(id).orElseThrow(() -> new NotFoundException(ErrorMessage.NOT_FOUND));
+    }
 }

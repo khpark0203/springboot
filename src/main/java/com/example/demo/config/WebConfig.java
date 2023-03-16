@@ -9,13 +9,13 @@ import com.example.demo.interceptor.ShoutInterceptor;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-	
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new LogInterceptor())
-				.addPathPatterns("/family/**");
+    
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LogInterceptor())
+                .addPathPatterns("/family/**");
 
-		registry.addInterceptor(new ShoutInterceptor())
-				.addPathPatterns("/family/**");
-	}
+        registry.addInterceptor(new ShoutInterceptor())
+                .addPathPatterns("/family/**");
+    }
 }

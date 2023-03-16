@@ -13,11 +13,11 @@ import com.example.demo.service.FirstService;
 @RequestMapping("/first")
 public class FirstController {
 
-	@Autowired
-	private FirstService firstService;
-	
-	@GetMapping("")
-	public Map<String, String> first() {
-		return firstService.getFirst();
-	}
+    @Autowired
+    private FirstService firstService;
+    
+    @GetMapping("")
+    public Map<String, String> first() {
+        return firstService.getFirst();
+    }
 }

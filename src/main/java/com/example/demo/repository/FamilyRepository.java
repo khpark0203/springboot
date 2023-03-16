@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import com.example.demo.model.Family;
 
 public interface FamilyRepository extends JpaRepository<Family, Long> {
-	@Query("SELECT f FROM Family f")
-	List<Family> findFamilyList();
+    @Query("SELECT f FROM Family f")
+    List<Family> findFamilyList();
 }
