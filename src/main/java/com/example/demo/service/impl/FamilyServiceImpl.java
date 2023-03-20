@@ -23,7 +23,9 @@ public class FamilyServiceImpl implements FamilyService {
     @Override
     public List<Family> getFamilyList() {
         // TODO: 지우기 그냥 테스트용
-        System.out.println(new GoarchClient<Family>().getUsers());
+        List<Family> l = new GoarchClient().getUsers();
+        System.out.println(l);
+        
         return familyRepository.findAll();
     }
 

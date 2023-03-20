@@ -1,9 +1,9 @@
 package com.example.demo.config;
 
-import reactor.netty.http.client.HttpClient;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -11,12 +11,16 @@ import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import reactor.netty.http.client.HttpClient;
 
 @Getter
 @Setter
+@Configuration
+@RequiredArgsConstructor
 public class WebClientConfig {
-    private WebClient client;
+    protected WebClient client;
     private HttpClient httpClient = HttpClient.create()
                                               .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
                                               .responseTimeout(Duration.ofMillis(5000))

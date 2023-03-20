@@ -1,26 +1,39 @@
 package com.example.demo.client;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.http.MediaType;
+import org.springframework.web.reactive.function.client.WebClientException;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import com.example.demo.config.WebClientConfig;
+import com.example.demo.exception.ErrorMessage;
+import com.example.demo.exception.NotFoundException;
+import com.example.demo.model.Family;
 
-public class GoarchClient<T> {
-    private WebClient client;
-    private String baseUrl = "http://localhost:8000";
+public class GoarchClient extends WebClientConfig {
+
+    private static final String BASE_URL = "http://localhost:8000";
 
     public GoarchClient() {
-        this.client = new WebClientConfig(this.baseUrl).getClient();
+        super(BASE_URL);
     }
 
-    public List<T> getUsers() {
-        List<T> c = new ArrayList<>();
-        return this.client.get()
-                          .uri("/api/v1/users")
-                          .retrieve()
-                          .bodyToMono(c.getClass())
-                          .block();
+    public List<Family> getUsers() {
+        try {
+            return this.client.get()
+                            .uri("/api/v1/users")
+                            .accept(MediaType.APPLICATION_JSON)
+                            .retrieve()
+                            .bodyToFlux(Family.class)
+                            .collectList()
+                            .block();
+        } catch (WebClientResponseException e) {
+            System.out.println("WebClientException " + e.getMessage());
+            System.out.println("WebClientException " + e.getCause());
+            throw new NotFoundException(ErrorMessage.NOT_FOUND);
+        } catch (WebClientException e) {
+            throw new NotFoundException(ErrorMessage.NOT_FOUND);
+        }
     }
 }
