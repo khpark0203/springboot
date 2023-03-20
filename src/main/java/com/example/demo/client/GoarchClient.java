@@ -8,6 +8,7 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
 
 import com.example.demo.config.WebClientConfig;
 import com.example.demo.exception.ErrorMessage;
+import com.example.demo.exception.InternalServerException;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.Family;
 
@@ -22,15 +23,16 @@ public class GoarchClient extends WebClientConfig {
     public List<Family> getUsers() {
         try {
             return this.client.get()
-                            .uri("/api/v1/users")
+                            .uri("/api/v1/status/500")
                             .accept(MediaType.APPLICATION_JSON)
                             .retrieve()
                             .bodyToFlux(Family.class)
                             .collectList()
                             .block();
         } catch (WebClientResponseException e) {
-            System.out.println("WebClientException " + e.getMessage());
-            System.out.println("WebClientException " + e.getCause());
+            if (e.getStatusCode().is5xxServerError()) {
+                throw new InternalServerException(ErrorMessage.CLIENT_INTERNAL_ERROR);
+            }
             throw new NotFoundException(ErrorMessage.NOT_FOUND);
         } catch (WebClientException e) {
             throw new NotFoundException(ErrorMessage.NOT_FOUND);
