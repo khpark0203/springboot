@@ -20,10 +20,13 @@ public class FamilyServiceImpl implements FamilyService {
     @Autowired
     private FamilyRepository familyRepository;
 
+    @Autowired
+    private GoarchClient goarchClient;
+
     @Override
     public List<Family> getFamilyList() {
         // TODO: 지우기 그냥 테스트용
-        List<Family> l = new GoarchClient().getUsers();
+        List<Family> l = goarchClient.getUsers();
         System.out.println(l);
         
         return familyRepository.findAll();

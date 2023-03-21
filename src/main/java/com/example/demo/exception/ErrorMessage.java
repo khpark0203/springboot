@@ -4,9 +4,10 @@ import lombok.Getter;
 
 @Getter
 public enum ErrorMessage {
-    NOT_FOUND(1000, "데이터가 없습니다"),
+    NOT_FOUND(404001, "데이터가 없습니다"),
     
-    CLIENT_INTERNAL_ERROR(5000, "호출 서버 오류")
+    INTERNAL_ERROR(500001, "서버 내부 오류"),
+    CLIENT_INTERNAL_ERROR(500500, "호출 서버 오류")
     
     ;
 

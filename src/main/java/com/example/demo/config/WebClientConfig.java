@@ -11,14 +11,12 @@ import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import reactor.netty.http.client.HttpClient;
 
 @Getter
 @Setter
 @Configuration
-@RequiredArgsConstructor
 public class WebClientConfig {
     protected WebClient client;
     private HttpClient httpClient = HttpClient.create()
@@ -26,6 +24,12 @@ public class WebClientConfig {
                                               .responseTimeout(Duration.ofMillis(5000))
                                               .doOnConnected(conn -> conn.addHandlerLast(new ReadTimeoutHandler(5000, TimeUnit.MILLISECONDS))
                                               .addHandlerLast(new WriteTimeoutHandler(5000, TimeUnit.MILLISECONDS)));
+
+    public WebClientConfig() {
+        this.client = WebClient.builder()
+                               .clientConnector(new ReactorClientHttpConnector(this.httpClient))
+                               .build();
+    }
 
     public WebClientConfig(String baseUrl) {
         this.client = WebClient.builder()
