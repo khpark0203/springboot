@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClientException;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
+import com.example.demo.client.message.GoarchClientMessage.GoarchUserResponse;
 import com.example.demo.config.WebClientConfig;
 import com.example.demo.exception.ErrorMessage;
 import com.example.demo.exception.InternalServerException;
 import com.example.demo.exception.NotFoundException;
-import com.example.demo.model.Family;
 
 @Component
 public class GoarchClient extends WebClientConfig {
@@ -21,15 +21,15 @@ public class GoarchClient extends WebClientConfig {
         super(baseUrl);
     }
     
-    public List<Family> getUsers() {
+    public List<GoarchUserResponse> getUsers() {
         try {
             return this.client.get()
-                            .uri("/api/v1/status/500")
-                            .accept(MediaType.APPLICATION_JSON)
-                            .retrieve()
-                            .bodyToFlux(Family.class)
-                            .collectList()
-                            .block();
+                              .uri("/api/v1/users")
+                              .accept(MediaType.APPLICATION_JSON)
+                              .retrieve()
+                              .bodyToFlux(GoarchUserResponse.class)
+                              .collectList()
+                              .block();
         } catch (WebClientResponseException e) {
             if (e.getStatusCode().is5xxServerError()) {
                 throw new InternalServerException(ErrorMessage.CLIENT_INTERNAL_ERROR);
