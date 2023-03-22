@@ -11,11 +11,9 @@ import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
 import lombok.Getter;
-import lombok.Setter;
 import reactor.netty.http.client.HttpClient;
 
 @Getter
-@Setter
 @Configuration
 public class WebClientConfig {
     protected WebClient client;
