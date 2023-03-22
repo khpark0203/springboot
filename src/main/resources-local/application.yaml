@@ -10,6 +10,12 @@ spring:
     username: root
     password: rhksgh
 
+logging:
+  level:
+    com:
+      example:
+        demo: trace
+
 external:
   goarch:
     baseurl: "http://localhost:8000"

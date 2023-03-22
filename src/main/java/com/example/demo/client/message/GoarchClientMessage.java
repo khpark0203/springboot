@@ -1,12 +1,10 @@
 package com.example.demo.client.message;
 
 import lombok.Getter;
-import lombok.Setter;
 
 public class GoarchClientMessage {
 
     @Getter
-    @Setter
     public static class GoarchUserResponse {
         private int id;
         private String name;
@@ -14,5 +12,11 @@ public class GoarchClientMessage {
         private String createdAt;
         private String updatedAt;
         private String deletedAt;
+    }
+
+    @Getter
+    public static class GoarchUserRequest {
+        private String name;
+        private int age;
     }
 }
