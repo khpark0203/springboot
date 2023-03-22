@@ -28,7 +28,7 @@ public class FamilyServiceImpl implements FamilyService {
         // TODO: 지우기 그냥 테스트용
         List<Family> l = goarchClient.getUsers();
         System.out.println(l);
-        
+
         return familyRepository.findAll();
     }
 

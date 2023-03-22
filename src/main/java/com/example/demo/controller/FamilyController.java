@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.controller.dto.FamilyRequest;
-import com.example.demo.controller.dto.FamilyResponse;
+import com.example.demo.controller.dto.FamilyDto.FamilyRequest;
+import com.example.demo.controller.dto.FamilyDto.FamilyResponse;
 import com.example.demo.model.Family;
 import com.example.demo.service.FamilyService;
 
