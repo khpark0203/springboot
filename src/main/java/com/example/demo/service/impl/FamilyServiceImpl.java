@@ -7,7 +7,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.client.GoarchClient;
-import com.example.demo.client.message.GoarchClientMessage.GoarchUserResponse;
+import com.example.demo.client.message.GoarchClientMessage.GoarchCreateUserRequest;
+import com.example.demo.client.message.GoarchClientMessage.GoarchGetUserResponse;
 import com.example.demo.exception.ErrorMessage;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.Family;
@@ -30,8 +31,14 @@ public class FamilyServiceImpl implements FamilyService {
     @Override
     public List<Family> getFamilyList() {
         // TODO: 지우기 그냥 테스트용
-        List<GoarchUserResponse> l = goarchClient.getUsers();
-        log.info("info log = {}", l);
+        List<GoarchGetUserResponse> l = goarchClient.getUsers();
+        log.info("{}", l);
+
+        GoarchCreateUserRequest user = GoarchCreateUserRequest.builder()
+                                                            .name("kwanho")
+                                                            .age(99)
+                                                            .build();
+        goarchClient.createUser(user);
 
         return familyRepository.findAll();
     }

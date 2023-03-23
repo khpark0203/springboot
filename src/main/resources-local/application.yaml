@@ -12,9 +12,12 @@ spring:
 
 logging:
   level:
+    root: info
     com:
       example:
-        demo: trace
+        demo:
+          service: debug
+          client:  debug
 
 external:
   goarch:

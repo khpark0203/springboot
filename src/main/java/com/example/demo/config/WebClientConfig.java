@@ -18,21 +18,21 @@ import reactor.netty.http.client.HttpClient;
 public class WebClientConfig {
     protected WebClient client;
     private HttpClient httpClient = HttpClient.create()
-                                              .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
-                                              .responseTimeout(Duration.ofMillis(5000))
-                                              .doOnConnected(conn -> conn.addHandlerLast(new ReadTimeoutHandler(5000, TimeUnit.MILLISECONDS))
-                                              .addHandlerLast(new WriteTimeoutHandler(5000, TimeUnit.MILLISECONDS)));
+                                            .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
+                                            .responseTimeout(Duration.ofMillis(5000))
+                                            .doOnConnected(conn -> conn.addHandlerLast(new ReadTimeoutHandler(5000, TimeUnit.MILLISECONDS))
+                                            .addHandlerLast(new WriteTimeoutHandler(5000, TimeUnit.MILLISECONDS)));
 
     public WebClientConfig() {
         this.client = WebClient.builder()
-                               .clientConnector(new ReactorClientHttpConnector(this.httpClient))
-                               .build();
+                            .clientConnector(new ReactorClientHttpConnector(this.httpClient))
+                            .build();
     }
 
     public WebClientConfig(String baseUrl) {
         this.client = WebClient.builder()
-                               .clientConnector(new ReactorClientHttpConnector(this.httpClient))
-                               .baseUrl(baseUrl)
-                               .build();
+                            .clientConnector(new ReactorClientHttpConnector(this.httpClient))
+                            .baseUrl(baseUrl)
+                            .build();
     }
 }
