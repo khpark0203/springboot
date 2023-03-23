@@ -1,6 +1,7 @@
 package com.example.demo.client;
 
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -45,30 +46,18 @@ public class GoarchClient extends WebClientConfig {
 
     public void createUser(GoarchCreateUserRequest user) {
         // CountDownLatch cdl = new CountDownLatch(1);
-        try {
-            this.client.post()
-                    .uri("/api/v1/users")
-                    .accept(MediaType.APPLICATION_JSON)
-                    .bodyValue(user)
-                    .retrieve()
-                    .bodyToMono(String.class)
-                    // .doOnTerminate(() -> cdl.countDown())
-                    .subscribe(res -> {
-                        System.out.println("RESPONSEEEEEEEEEE " + res); 
-                    }, e -> {
-                        System.out.println("RESPONSEEEEEEEEEEEEEEEE " + e);
-                    });
-            
-            // cdl.await();
-        } catch (WebClientResponseException e) {
-            if (e.getStatusCode().is5xxServerError()) {
-                throw new InternalServerException(ErrorMessage.CLIENT_INTERNAL_ERROR);
-            } else if (e.getStatusCode().is4xxClientError()) {
-                throw new NotFoundException(ErrorMessage.NOT_FOUND);
-            }
-            throw new InternalServerException(ErrorMessage.INTERNAL_ERROR);
-        } catch (WebClientException e) {
-            throw new InternalServerException(ErrorMessage.INTERNAL_ERROR);
-        }
+        this.client.post()
+                .uri("/api/v1/users")
+                .accept(MediaType.APPLICATION_JSON)
+                .bodyValue(user)
+                .retrieve()
+                .bodyToMono(String.class)
+                // .doOnTerminate(() -> cdl.countDown())
+                .subscribe(res -> {
+                    System.out.println("RESPONSEEEEEEEEEE " + res); 
+                }, ex -> {
+                    System.out.println("RESPONSEEEEEEEEEE " + ex); 
+                });
+        // cdl.await();
     }
 }
