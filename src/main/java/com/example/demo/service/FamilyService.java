@@ -7,5 +7,6 @@ import com.example.demo.model.Family;
 public interface FamilyService {
     List<Family> getFamilyList();
     Family createFamily(Family family);
+    Family updateFamily(Family family);
     Family getFamily(Long id);
 }

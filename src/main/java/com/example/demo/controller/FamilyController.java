@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,6 +52,13 @@ public class FamilyController {
     public ResponseEntity<FamilyResponse> create(@RequestBody FamilyRequest familyReq) {
         FamilyResponse res = new FamilyResponse();
         res.fromEntity(familyService.createFamily(familyReq.toEntity()));
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<FamilyResponse> update(@RequestBody FamilyRequest familyReq) {
+        FamilyResponse res = new FamilyResponse();
+        res.fromEntity(familyService.updateFamily(familyReq.toEntity()));
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }

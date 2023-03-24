@@ -25,10 +25,9 @@ public class FamilyDto {
         private String name;
 
         public FamilyResponse fromEntity(Family f) {
-            FamilyResponse fr = new FamilyResponse();
-            fr.id   = f.getId();
-            fr.name = f.getName();
-            return fr;
+            this.id   = f.getId();
+            this.name = f.getName();
+            return this;
         }
     }
 }

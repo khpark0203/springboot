@@ -45,6 +45,13 @@ public class FamilyServiceImpl implements FamilyService {
 
     @Override
     public Family createFamily(Family family) {
+        Long id = familyRepository.save(family).getId();
+        family.setId(id);
+        return family;
+    }
+
+    @Override
+    public Family updateFamily(Family family) {
         return familyRepository.save(family);
     }
 

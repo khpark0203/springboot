@@ -10,6 +10,7 @@ import lombok.Setter;
 
 @Entity
 @Getter
+@Setter
 @Builder
 public class Family {
 
