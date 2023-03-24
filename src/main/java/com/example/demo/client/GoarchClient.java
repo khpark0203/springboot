@@ -1,7 +1,6 @@
 package com.example.demo.client;
 
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -45,7 +44,7 @@ public class GoarchClient extends WebClientConfig {
     }
 
     public void createUser(GoarchCreateUserRequest user) {
-        // CountDownLatch cdl = new CountDownLatch(1);
+        // CountDownLatch countDownLatch = new CountDownLatch(1);
         this.client.post()
                 .uri("/api/v1/users")
                 .accept(MediaType.APPLICATION_JSON)

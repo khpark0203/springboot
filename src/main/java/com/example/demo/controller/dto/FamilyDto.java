@@ -12,10 +12,10 @@ public class FamilyDto {
         private String name;
     
         public Family toEntity() {
-            Family family = new Family();
-            family.setId(this.id);
-            family.setName(this.name);
-            return family;
+            return Family.builder()
+                        .id(this.id)
+                        .name(this.name)
+                        .build();
         }
     }
 
