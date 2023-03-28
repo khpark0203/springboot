@@ -34,7 +34,8 @@ public class FamilyController {
 
         for (Family f : familyList) {
             FamilyResponse familyRes = new FamilyResponse();
-            res.add(familyRes.fromEntity(f));
+            familyRes.setFromEntity(f);
+            res.add(familyRes);
         }
 
         return new ResponseEntity<>(res, HttpStatus.OK);
@@ -43,22 +44,27 @@ public class FamilyController {
     @GetMapping("/{id}")
     public ResponseEntity<FamilyResponse> getFamily(@PathVariable Long id) {
         Family family = familyService.getFamily(id);
-        FamilyResponse familyResponse = new FamilyResponse().fromEntity(family);
-        
+        FamilyResponse familyResponse = new FamilyResponse();
+        familyResponse.setFromEntity(family);
+
         return new ResponseEntity<>(familyResponse, HttpStatus.OK);
     }
 
     @PostMapping("")
     public ResponseEntity<FamilyResponse> create(@RequestBody FamilyRequest familyReq) {
         FamilyResponse res = new FamilyResponse();
-        res.fromEntity(familyService.createFamily(familyReq.toEntity()));
+        res.setFromEntity(familyService.createFamily(familyReq.toEntity()));
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<FamilyResponse> update(@RequestBody FamilyRequest familyReq) {
+    public ResponseEntity<FamilyResponse> update(
+        @PathVariable Long id,
+        @RequestBody FamilyRequest familyReq
+    ) {
         FamilyResponse res = new FamilyResponse();
-        res.fromEntity(familyService.updateFamily(familyReq.toEntity()));
+        familyReq.setId(id);
+        res.setFromEntity(familyService.updateFamily(familyReq.toEntity()));
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }
