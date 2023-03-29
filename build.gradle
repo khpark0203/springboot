@@ -90,3 +90,9 @@ jar {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+// 여기서 디버깅 설정도 가능함
+// tasks.withType(JavaExec) {
+//     debug = true
+//     jvmArgs = ['-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=20000']
+// }
