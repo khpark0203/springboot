@@ -18,15 +18,15 @@ group = 'com.example'
 sourceCompatibility = '17'
 
 // querydsl 사용할 경로 지정합니다. 현재 지정한 부분은 .gitignore에 포함되므로 git에 올라가지 않습니다. 
-def querydslDir = "$buildDir/generated"
+def querydslDir = "$buildDir/generated/querydsl"
  
 // JPA 사용여부 및 사용 경로 설정
 querydsl {
     jpa = true
-    querydslSourcesDir = querydslDir
+    querydslDefault = true
 }
 
-// querydsl 컴파일 시 사용할 옵션 설정
+// // querydsl 컴파일 시 사용할 옵션 설정
 compileQuerydsl {
     options.annotationProcessorPath = configurations.querydsl
 }
@@ -44,11 +44,9 @@ ext.profile = (!project.hasProperty('profile') || !profile) ? 'local' : profile
 sourceSets {
     main {
         resources {
-            srcDirs "src/main/resources-${profile}"
+            srcDirs += ["src/main/resources-${profile}"]
         }
 
-        // build시 사용할 sourceSet 추가 설정
-        // main.java.srcDir querydslDir
         java {
             srcDirs += [querydslDir]
         }
@@ -77,8 +75,12 @@ dependencies {
     annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
 }
 
-clean {
-    delete file(querydslDir)
+tasks.withType(JavaCompile) {
+    options.annotationProcessorGeneratedSourcesDirectory = file(querydslDir)
+}
+
+clean.doLast {
+    file(querydslDir).deleteDir()
 }
 
 jar {

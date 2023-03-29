@@ -14,9 +14,10 @@ public class FamilyDto {
         private String name;
     
         public Family toEntity() {
-            Family f = new Family(this.id, this.name);
-
-            return f;
+            return Family.builder()
+                        .id(id)
+                        .name(name)
+                        .build();
         }
     }
 
