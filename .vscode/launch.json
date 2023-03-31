@@ -6,7 +6,8 @@
             "name": "Launch Java Program",
             "request": "launch",
             "mainClass": "com.example.demo.DemoApplication",
-            "preLaunchTask": "java build"
+            "preLaunchTask": "java build",
+            "postDebugTask": "delete bin"
         }
     ]
 }

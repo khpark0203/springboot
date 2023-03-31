@@ -17,6 +17,15 @@
             "presentation": {
                 "close": true
             }
+        },
+        {
+            
+            "type": "shell",
+            "label": "delete bin",
+            "command": ["rm", "-r", "bin"],
+            "presentation": {
+                "close": true
+            }
         }
-    ],
+    ]
 }
