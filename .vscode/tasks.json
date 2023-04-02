@@ -8,23 +8,14 @@
             ],
             "isFullBuild": true,
             "group": {
-                "kind": "test",
+                "kind": "build",
                 "isDefault": true
             },
             "problemMatcher": [],
             "label": "java build",
             "detail": "$(tools) Build all the Java projects in workspace.",
             "presentation": {
-                "close": true
-            }
-        },
-        {
-            
-            "type": "shell",
-            "label": "delete bin",
-            "command": ["rm", "-r", "bin"],
-            "presentation": {
-                "close": true
+                "close": true,
             }
         }
     ]
