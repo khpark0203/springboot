@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.controller.dto.FamilyDto.FamilyRequest;
@@ -26,10 +27,15 @@ public class FamilyController {
     private FamilyService familyService;
 
     @GetMapping("")
-    public ResponseEntity<List<FamilyResponse>> getFamilyList() {
-        List<FamilyResponse> familyList = familyService.getFamilyList();
+    public ResponseEntity<List<?>> getFamilyList(
+        @RequestParam(required = false) boolean withLecture
+    ) {
+        List<?> list;
+        if (withLecture) {
+        }
+        list = familyService.getFamilyList();
 
-        return new ResponseEntity<>(familyList, HttpStatus.OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
