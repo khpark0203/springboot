@@ -45,7 +45,7 @@ public class FamilyServiceImpl implements FamilyService {
         List<FamilyResponse> familyRes = new ArrayList<>();
 
         for (Family f : familyList) {
-            FamilyResponse fr = new FamilyResponse().setFromEntity(f);
+            FamilyResponse fr = new FamilyResponse().fromEntity(f);
             familyRes.add(fr);
         }
 
@@ -56,7 +56,7 @@ public class FamilyServiceImpl implements FamilyService {
     public FamilyResponse createFamily(FamilyRequest family) {
         Family familyEntity = family.toEntity();
         familyRepository.save(familyEntity);
-        FamilyResponse familyRes = new FamilyResponse().setFromEntity(familyEntity);
+        FamilyResponse familyRes = new FamilyResponse().fromEntity(familyEntity);
 
         return familyRes;
     }
@@ -65,7 +65,7 @@ public class FamilyServiceImpl implements FamilyService {
     public FamilyResponse updateFamily(FamilyRequest family) {
         Family familyEntity = family.toEntity();
         familyRepository.save(familyEntity);
-        FamilyResponse familyRes = new FamilyResponse().setFromEntity(familyEntity);
+        FamilyResponse familyRes = new FamilyResponse().fromEntity(familyEntity);
         return familyRes;
     }
 
@@ -73,6 +73,6 @@ public class FamilyServiceImpl implements FamilyService {
     public FamilyResponse getFamily(Long id) {
         Family f = familyRepository.findById(id).orElseThrow(() -> new NotFoundException(ErrorMessage.NOT_FOUND));
 
-        return new FamilyResponse().setFromEntity(f);
+        return new FamilyResponse().fromEntity(f);
     }
 }

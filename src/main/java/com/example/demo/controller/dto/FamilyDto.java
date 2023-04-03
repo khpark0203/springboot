@@ -29,7 +29,7 @@ public class FamilyDto {
         private String name;
         private String lecture;
 
-        public FamilyResponse setFromEntity(Family f) {
+        public FamilyResponse fromEntity(Family f) {
             this.id      = f.getId();
             this.name    = f.getName();
             this.lecture = f.getLecture();
