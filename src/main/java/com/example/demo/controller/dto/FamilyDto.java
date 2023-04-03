@@ -12,11 +12,13 @@ public class FamilyDto {
     public static class FamilyRequest {
         private Long id;
         private String name;
+        private String lecture;
     
         public Family toEntity() {
             return Family.builder()
                         .id(id)
                         .name(name)
+                        .lecture(lecture)
                         .build();
         }
     }
@@ -25,10 +27,14 @@ public class FamilyDto {
     public static class FamilyResponse {
         private Long id;
         private String name;
+        private String lecture;
 
-        public void setFromEntity(Family f) {
-            this.id   = f.getId();
-            this.name = f.getName();
+        public FamilyResponse setFromEntity(Family f) {
+            this.id      = f.getId();
+            this.name    = f.getName();
+            this.lecture = f.getLecture();
+
+            return this;
         }
     }
 }

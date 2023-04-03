@@ -23,4 +23,5 @@ public class Family {
     private Long id;
 
     private String name;
+    private String lecture;
 }

@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.controller.dto.FamilyDto.FamilyRequest;
 import com.example.demo.controller.dto.FamilyDto.FamilyResponse;
-import com.example.demo.model.Family;
 import com.example.demo.service.FamilyService;
 
 @RestController
@@ -29,31 +27,21 @@ public class FamilyController {
 
     @GetMapping("")
     public ResponseEntity<List<FamilyResponse>> getFamilyList() {
-        List<Family> familyList = familyService.getFamilyList();
-        List<FamilyResponse> res = new ArrayList<>();
+        List<FamilyResponse> familyList = familyService.getFamilyList();
 
-        for (Family f : familyList) {
-            FamilyResponse familyRes = new FamilyResponse();
-            familyRes.setFromEntity(f);
-            res.add(familyRes);
-        }
-
-        return new ResponseEntity<>(res, HttpStatus.OK);
+        return new ResponseEntity<>(familyList, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<FamilyResponse> getFamily(@PathVariable Long id) {
-        Family family = familyService.getFamily(id);
-        FamilyResponse familyResponse = new FamilyResponse();
-        familyResponse.setFromEntity(family);
+        FamilyResponse family = familyService.getFamily(id);
 
-        return new ResponseEntity<>(familyResponse, HttpStatus.OK);
+        return new ResponseEntity<>(family, HttpStatus.OK);
     }
 
     @PostMapping("")
     public ResponseEntity<FamilyResponse> create(@RequestBody FamilyRequest familyReq) {
-        FamilyResponse res = new FamilyResponse();
-        res.setFromEntity(familyService.createFamily(familyReq.toEntity()));
+        FamilyResponse res = familyService.createFamily(familyReq);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
@@ -62,9 +50,8 @@ public class FamilyController {
         @PathVariable Long id,
         @RequestBody FamilyRequest familyReq
     ) {
-        FamilyResponse res = new FamilyResponse();
         familyReq.setId(id);
-        res.setFromEntity(familyService.updateFamily(familyReq.toEntity()));
+        FamilyResponse res = familyService.updateFamily(familyReq);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }

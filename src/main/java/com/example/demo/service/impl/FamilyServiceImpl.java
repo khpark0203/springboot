@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.client.GoarchClient;
+import com.example.demo.controller.dto.FamilyDto.FamilyRequest;
+import com.example.demo.controller.dto.FamilyDto.FamilyResponse;
 import com.example.demo.exception.ErrorMessage;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.Family;
@@ -27,7 +30,7 @@ public class FamilyServiceImpl implements FamilyService {
     private GoarchClient goarchClient;
 
     @Override
-    public List<Family> getFamilyList() {
+    public List<FamilyResponse> getFamilyList() {
         // TODO: 지우기 그냥 테스트용
         // List<GoarchGetUserResponse> l = goarchClient.getUsers();
         // log.info("{}", l);
@@ -38,22 +41,38 @@ public class FamilyServiceImpl implements FamilyService {
         //                                                     .build();
         // goarchClient.createUser(user);
 
-        return familyRepository.searchAll();
+        List<Family> familyList = familyRepository.searchAll();
+        List<FamilyResponse> familyRes = new ArrayList<>();
+
+        for (Family f : familyList) {
+            FamilyResponse fr = new FamilyResponse().setFromEntity(f);
+            familyRes.add(fr);
+        }
+
+        return familyRes;
     }
 
     @Override
-    public Family createFamily(Family family) {
-        familyRepository.save(family);
-        return family;
+    public FamilyResponse createFamily(FamilyRequest family) {
+        Family familyEntity = family.toEntity();
+        familyRepository.save(familyEntity);
+        FamilyResponse familyRes = new FamilyResponse().setFromEntity(familyEntity);
+
+        return familyRes;
     }
 
     @Override
-    public Family updateFamily(Family family) {
-        return familyRepository.save(family);
+    public FamilyResponse updateFamily(FamilyRequest family) {
+        Family familyEntity = family.toEntity();
+        familyRepository.save(familyEntity);
+        FamilyResponse familyRes = new FamilyResponse().setFromEntity(familyEntity);
+        return familyRes;
     }
 
     @Override
-    public Family getFamily(Long id) {
-        return familyRepository.findById(id).orElseThrow(() -> new NotFoundException(ErrorMessage.NOT_FOUND));
+    public FamilyResponse getFamily(Long id) {
+        Family f = familyRepository.findById(id).orElseThrow(() -> new NotFoundException(ErrorMessage.NOT_FOUND));
+
+        return new FamilyResponse().setFromEntity(f);
     }
 }
