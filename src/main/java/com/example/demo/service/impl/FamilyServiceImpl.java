@@ -53,6 +53,29 @@ public class FamilyServiceImpl implements FamilyService {
     }
 
     @Override
+    public List<FamilyResponse> getFamilyListWithLecture() {
+        // TODO: 지우기 그냥 테스트용
+        // List<GoarchGetUserResponse> l = goarchClient.getUsers();
+        // log.info("{}", l);
+
+        // GoarchCreateUserRequest user = GoarchCreateUserRequest.builder()
+        //                                                     .name("kwanho")
+        //                                                     .age(99)
+        //                                                     .build();
+        // goarchClient.createUser(user);
+
+        List<Family> familyList = familyRepository.searchAll();
+        List<FamilyResponse> familyRes = new ArrayList<>();
+
+        for (Family f : familyList) {
+            FamilyResponse fr = new FamilyResponse().fromEntity(f);
+            familyRes.add(fr);
+        }
+
+        return familyRes;
+    }
+
+    @Override
     public FamilyResponse createFamily(FamilyRequest family) {
         Family familyEntity = family.toEntity();
         familyRepository.save(familyEntity);

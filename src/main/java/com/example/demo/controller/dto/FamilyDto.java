@@ -1,6 +1,7 @@
 package com.example.demo.controller.dto;
 
 import com.example.demo.model.Family;
+import com.example.demo.model.Lecture;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +13,7 @@ public class FamilyDto {
     public static class FamilyRequest {
         private Long id;
         private String name;
-        private String lecture;
+        private Lecture lecture;
     
         public Family toEntity() {
             return Family.builder()
@@ -27,7 +28,7 @@ public class FamilyDto {
     public static class FamilyResponse {
         private Long id;
         private String name;
-        private String lecture;
+        private Lecture lecture;
 
         public FamilyResponse fromEntity(Family f) {
             this.id      = f.getId();
