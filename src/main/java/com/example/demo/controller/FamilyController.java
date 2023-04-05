@@ -27,14 +27,14 @@ public class FamilyController {
     private FamilyService familyService;
 
     @GetMapping("")
-    public ResponseEntity<List<?>> getFamilyList(
+    public ResponseEntity<List<FamilyResponse>> getFamilyList(
         @RequestParam(required = false) boolean withLecture
     ) {
-        List<?> list;
-        if (withLecture) {
+        List<FamilyResponse> list = familyService.getFamilyListWithLecture();
+        for (FamilyResponse f : list) {
+            System.out.println(f.getId());
+            System.out.println(f.getLecture());
         }
-        list = familyService.getFamilyList();
-
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 

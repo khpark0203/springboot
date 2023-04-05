@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,7 +27,7 @@ public class Family {
 
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "lecture")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "lecture", nullable = false)
     private Lecture lecture;
 }

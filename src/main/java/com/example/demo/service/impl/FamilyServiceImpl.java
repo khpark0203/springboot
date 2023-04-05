@@ -15,6 +15,7 @@ import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.Family;
 import com.example.demo.repository.FamilyRepository;
 import com.example.demo.service.FamilyService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -41,11 +42,11 @@ public class FamilyServiceImpl implements FamilyService {
         //                                                     .build();
         // goarchClient.createUser(user);
 
-        List<Family> familyList = familyRepository.searchAll();
+        List<Family> familyList = familyRepository.findAll();
         List<FamilyResponse> familyRes = new ArrayList<>();
 
         for (Family f : familyList) {
-            FamilyResponse fr = new FamilyResponse().fromEntity(f);
+            FamilyResponse fr = new FamilyResponse(f.getId(), f.getName());
             familyRes.add(fr);
         }
 
@@ -54,21 +55,12 @@ public class FamilyServiceImpl implements FamilyService {
 
     @Override
     public List<FamilyResponse> getFamilyListWithLecture() {
-        // TODO: 지우기 그냥 테스트용
-        // List<GoarchGetUserResponse> l = goarchClient.getUsers();
-        // log.info("{}", l);
-
-        // GoarchCreateUserRequest user = GoarchCreateUserRequest.builder()
-        //                                                     .name("kwanho")
-        //                                                     .age(99)
-        //                                                     .build();
-        // goarchClient.createUser(user);
-
         List<Family> familyList = familyRepository.searchAll();
         List<FamilyResponse> familyRes = new ArrayList<>();
 
         for (Family f : familyList) {
-            FamilyResponse fr = new FamilyResponse().fromEntity(f);
+            FamilyResponse fr = new FamilyResponse(f.getId(), f.getName(), f.getLecture());
+            System.out.println(f.getLecture());
             familyRes.add(fr);
         }
 

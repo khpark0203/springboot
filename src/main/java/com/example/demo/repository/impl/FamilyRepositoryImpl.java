@@ -16,8 +16,8 @@ public class FamilyRepositoryImpl implements FamilyRepositoryCustom {
 
     @Override
     public List<Family> searchAll() {
-        QFamily family = QFamily.family;
-        List<Family> res = jpaQueryFactory.selectFrom(family).fetch();
+        QFamily f = QFamily.family;
+        List<Family> res = jpaQueryFactory.selectFrom(f).fetch();
         return res;
     }
 }
