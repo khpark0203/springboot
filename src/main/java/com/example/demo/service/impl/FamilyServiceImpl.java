@@ -15,7 +15,6 @@ import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.Family;
 import com.example.demo.repository.FamilyRepository;
 import com.example.demo.service.FamilyService;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -46,21 +45,7 @@ public class FamilyServiceImpl implements FamilyService {
         List<FamilyResponse> familyRes = new ArrayList<>();
 
         for (Family f : familyList) {
-            FamilyResponse fr = new FamilyResponse(f.getId(), f.getName());
-            familyRes.add(fr);
-        }
-
-        return familyRes;
-    }
-
-    @Override
-    public List<FamilyResponse> getFamilyListWithLecture() {
-        List<Family> familyList = familyRepository.searchAll();
-        List<FamilyResponse> familyRes = new ArrayList<>();
-
-        for (Family f : familyList) {
-            FamilyResponse fr = new FamilyResponse(f.getId(), f.getName(), f.getLecture());
-            System.out.println(f.getLecture());
+            FamilyResponse fr = new FamilyResponse().fromEntity(f);
             familyRes.add(fr);
         }
 

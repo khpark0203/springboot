@@ -30,11 +30,7 @@ public class FamilyController {
     public ResponseEntity<List<FamilyResponse>> getFamilyList(
         @RequestParam(required = false) boolean withLecture
     ) {
-        List<FamilyResponse> list = familyService.getFamilyListWithLecture();
-        for (FamilyResponse f : list) {
-            System.out.println(f.getId());
-            System.out.println(f.getLecture());
-        }
+        List<FamilyResponse> list = familyService.getFamilyList();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
