@@ -1,6 +1,5 @@
 package com.example.demo.controller.dto;
 
-import com.example.demo.controller.dto.LectureDto.LectureResponse;
 import com.example.demo.model.Family;
 
 import lombok.Getter;
